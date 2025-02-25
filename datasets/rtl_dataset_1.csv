@@ -1,0 +1,3 @@
+Gate_Type,Fan_In,Fan_Out,Num_Gates,Path_Length,Logic_Depth
+XOR,1,4,2,10,8.325206643278882
+XOR,3,2,2,6,6.32945569602243
