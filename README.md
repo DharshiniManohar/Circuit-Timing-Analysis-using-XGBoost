@@ -1,104 +1,87 @@
-⏱️ Circuit Timing Analysis using XGBoost
+🔹 CIRCUIT-TIMING-ANALYSIS USING XGBOOST
 
-📌 Project Overview
+An AI-powered solution to predict combinational depth in logic circuits using machine learning.
 
-This project focuses on predicting the logic depth of circuits using XGBoost, an efficient machine learning model. The trained model is saved as optimizing_timing_model.pkl and can be used to analyze circuit performance based on given features.
+📌 Overview
+This project utilizes XGBoost Regression to accurately predict the Logic Depth of digital circuits based on circuit parameters such as:
 
-🛠 Features
+✔ Fan-In 
 
-Predicts logic depth of circuits based on input parameters.
+✔ Fan-Out
 
-Uses XGBoost for high-performance learning.
+✔ Number of Gates
 
-Evaluates model performance with MAE, MSE, and R² score.
+✔ Path Length
 
-Saves and loads optimized models efficiently.
 
-Supports real-time predictions.
+By training on datasets that include Logic Circuit and RTL data, the model helps in optimizing circuit performance and reducing design bottlenecks.
 
-📂 Dataset
+📂 Dataset Information
+We use multiple datasets stored in the datasets/ folder:
 
-The dataset login_circuit_dataset.csv consists of the following columns:
+📌 logic_circuit_dataset.csv (Base dataset)
 
-Component: Circuit component type.
+📌 rtl_dataset1.csv → rtl_dataset7.csv (RTL module datasets)
 
-Fan_In: Number of inputs to a gate.
 
-Fan_Out: Number of outputs from a gate.
+The combined dataset is used to train the model for improved generalization and accuracy.
 
-Num_Gates: Total number of gates in the circuit.
+⚙️ Model Training & Architecture
+Uses XGBoost Regressor with:
 
-Path_Length: Length of the critical path in the circuit.
+✅ n_estimators=200
 
-Logic_Depth: Target variable for prediction.
+✅ max_depth=6
 
-🚀 Installation & Setup
+✅ learning_rate=0.05
 
-Clone the repository:
+Dataset is split 80% Train / 20% Test.
 
-git clone https://github.com/yourusername/circuit-timing-analysis.git
-cd circuit-timing-analysis
+Model performance is evaluated using:
 
-Create and activate a virtual environment (optional but recommended):
+✔ Mean Absolute Error (MAE)
 
-python -m venv venv
-source venv/bin/activate  # On macOS/Linux
-venv\Scripts\activate  # On Windows
+✔ Mean Squared Error (MSE)
 
-Install dependencies:
+✔ R-squared (R² Score)
 
-pip install -r requirements.txt
+Once trained, the model is saved as optimized_timing_model.pkl for real-time predictions.
 
-Ensure the dataset login_circuit_dataset.csv is in the project directory.
 
-🏗 Model Training & Optimization
+🚀 How to Run
+1️⃣ Install Dependencies
 
-Run the following command to train and optimize the model:
+pip install pandas numpy joblib xgboost matplotlib scikit-learn
 
-python main.py
+2️⃣ Run the Prediction Script
 
-The model will be saved as optimizing_timing_model.pkl after optimization.
+python predict_logic_depth.py
 
-📊 Model Evaluation
+➡️ Enter Fan-In, Fan-Out, Number of Gates, and Path Length to get the Predicted Logic Depth.
 
-After training, the model performance is evaluated using:
+📊 Model Performance
 
-Mean Absolute Error (MAE): Measures average prediction error.
+✅ Achieves high prediction accuracy using real-world circuit data.
 
-Mean Squared Error (MSE): Measures squared error penalty.
+✅ Provides insights into circuit complexity for optimization.
 
-R² Score: Indicates how well predictions match actual values.
+✅ Scales efficiently with large datasets.
 
-📌 Usage
+📈 Visualization
+The model generates a scatter plot comparing Actual vs Predicted Logic Depth to validate performance.
 
-Load and Predict with the Optimized Model
+![image](https://github.com/user-attachments/assets/20f9a98e-924e-4a2b-a7a9-72155f98e97b)
 
-import pickle
-import numpy as np
 
-# Load the trained model
-with open("optimizing_timing_model.pkl", "rb") as f:
-    model = pickle.load(f)
+🛠 Future Enhancements
 
-# Sample input features: [Fan_In, Fan_Out, Num_Gates, Path_Length]
-circuit_features = np.array([[3, 5, 10, 15]])
+🔹 Integration with EDA tools for automated optimization.
 
-# Make prediction
-predicted_logic_depth = model.predict(circuit_features)
-print(f"Predicted Logic Depth: {predicted_logic_depth[0]}")
+🔹 Support for more complex circuit structures.
 
-🖼️ Visualization
+🔹 Hybrid AI models for improved accuracy.
 
-The script generates Prediction vs. Actual Plot to visualize model accuracy.
-Ensure matplotlib is installed to display the plot.
+👨‍💻 Contributors
 
-🏆 Next Steps
-
-🛠 Improve performance by testing GNNs or LSTMs for sequential dependencies.
-
-🔍 Try feature engineering to enhance circuit analysis.
-
-📈 Compare results with different ML models.
-
-👨‍💻 Contributors: Your Name📜 License: MIT📧 Contact: your.email@example.com
+🚀 Developed by Dharshini
 
